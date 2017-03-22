@@ -22,6 +22,7 @@ public final class Constants {
 
     public static final String SHARED_PREF_NAME = "com.xengar.android.wordcounter";
     public static final String DEFAULT_FONT_SIZE = "14";
+    public static final String CURRENT_TEXT = "current_text";
 
 
     /**

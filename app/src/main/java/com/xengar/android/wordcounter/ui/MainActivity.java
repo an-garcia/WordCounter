@@ -26,6 +26,8 @@ import android.widget.MultiAutoCompleteTextView;
 import com.xengar.android.wordcounter.R;
 import com.xengar.android.wordcounter.utils.ActivityUtils;
 
+import static com.xengar.android.wordcounter.utils.Constants.CURRENT_TEXT;
+
 /**
  * MainActivity
  */
@@ -41,6 +43,13 @@ public class MainActivity extends AppCompatActivity {
         MultiAutoCompleteTextView textView = (MultiAutoCompleteTextView) findViewById(R.id.text);
         int fontSize = Integer.parseInt(ActivityUtils.getPreferenceFontSize(getApplicationContext()));
         textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, fontSize);
+
+        String currentText = ActivityUtils.getCurrentText(getApplicationContext());
+        if (currentText != null){
+            textView.setText(currentText);
+            ActivityUtils.saveStringToPreferences(getApplicationContext(), CURRENT_TEXT, null);
+        }
+
     }
 
     @Override
@@ -59,6 +68,9 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            MultiAutoCompleteTextView textView = (MultiAutoCompleteTextView) findViewById(R.id.text);
+            String currentText = textView.getText().toString();
+            ActivityUtils.saveStringToPreferences(getApplicationContext(), CURRENT_TEXT, currentText);
             ActivityUtils.launchSettingsActivity(getApplicationContext());
             return true;
         }

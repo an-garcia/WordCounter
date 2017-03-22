@@ -26,6 +26,7 @@ import android.speech.tts.TextToSpeech;
 import com.xengar.android.wordcounter.R;
 import com.xengar.android.wordcounter.ui.SettingsActivity;
 
+import static com.xengar.android.wordcounter.utils.Constants.CURRENT_TEXT;
 import static com.xengar.android.wordcounter.utils.Constants.DEFAULT_FONT_SIZE;
 import static com.xengar.android.wordcounter.utils.Constants.SHARED_PREF_NAME;
 
@@ -136,6 +137,16 @@ public class ActivityUtils {
         String key = context.getString(R.string.pref_font_size);
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         return prefs.getString(key, DEFAULT_FONT_SIZE);
+    }
+
+    /**
+     * Returns the current text from Shared preferences.
+     * @param context context
+     * @return boolean or default(true)
+     */
+    public static String getCurrentText(final Context context) {
+        SharedPreferences prefs = context.getSharedPreferences(SHARED_PREF_NAME, 0);
+        return prefs.getString(CURRENT_TEXT, null);
     }
 
 
