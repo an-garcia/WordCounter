@@ -18,8 +18,10 @@ package com.xengar.android.wordcounter.ui;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.MultiAutoCompleteTextView;
 
 import com.xengar.android.wordcounter.R;
 import com.xengar.android.wordcounter.utils.ActivityUtils;
@@ -36,15 +38,9 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        /*
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });*/
+        MultiAutoCompleteTextView textView = (MultiAutoCompleteTextView) findViewById(R.id.text);
+        int fontSize = Integer.parseInt(ActivityUtils.getPreferenceFontSize(getApplicationContext()));
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, fontSize);
     }
 
     @Override

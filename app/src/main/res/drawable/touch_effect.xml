@@ -14,11 +14,10 @@
      See the License for the specific language governing permissions and
      limitations under the License.
  -->
-<resources>
-    <color name="colorPrimary">#F44336</color>
-    <color name="colorPrimaryDark">#D50000</color>
-    <color name="colorAccent">#3F51B5</color>
-
-    <color name="colorBlack">#000000</color>
-    <color name="playColor">#E8EAF6</color>
-</resources>
+<ripple
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="#FFFFFF"
+    tools:targetApi="21" >
+    <item android:drawable="@color/playColor" />
+</ripple>
