@@ -67,12 +67,17 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            MultiAutoCompleteTextView textView = (MultiAutoCompleteTextView) findViewById(R.id.text);
-            String currentText = textView.getText().toString();
-            ActivityUtils.saveStringToPreferences(getApplicationContext(), CURRENT_TEXT, currentText);
-            ActivityUtils.launchSettingsActivity(getApplicationContext());
-            return true;
+        switch (id) {
+            case R.id.action_settings:
+                MultiAutoCompleteTextView textView = (MultiAutoCompleteTextView) findViewById(R.id.text);
+                String currentText = textView.getText().toString();
+                ActivityUtils.saveStringToPreferences(getApplicationContext(), CURRENT_TEXT, currentText);
+                ActivityUtils.launchSettingsActivity(getApplicationContext());
+                return true;
+
+            case R.id.action_help:
+                ActivityUtils.launchHelpActivity(getApplicationContext());
+                return true;
         }
 
         return super.onOptionsItemSelected(item);

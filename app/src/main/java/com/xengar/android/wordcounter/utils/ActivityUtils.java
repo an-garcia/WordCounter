@@ -23,7 +23,11 @@ import android.os.Build;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
 import android.speech.tts.TextToSpeech;
+import android.text.Html;
+import android.text.Spanned;
+
 import com.xengar.android.wordcounter.R;
+import com.xengar.android.wordcounter.ui.HelpActivity;
 import com.xengar.android.wordcounter.ui.SettingsActivity;
 
 import static com.xengar.android.wordcounter.utils.Constants.CURRENT_TEXT;
@@ -97,12 +101,12 @@ public class ActivityUtils {
     /**
      * Launches Help Activity.
      * @param context context
-     */ /*
+     */
     public static void launchHelpActivity(final Context context) {
         Intent intent = new Intent(context, HelpActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(intent);
-    }*/
+    }
 
     /**
      * Launches Settings Activity.
@@ -140,6 +144,17 @@ public class ActivityUtils {
     }
 
     /**
+     * Returns the case sensitive preference in Settings.
+     * @param context Context
+     * @return
+     */
+    public static boolean getPreferenceCaseSensitive(final Context context) {
+        String key = context.getString(R.string.pref_case_sensitive);
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        return prefs.getBoolean(key, true);
+    }
+
+    /**
      * Returns the current text from Shared preferences.
      * @param context context
      * @return boolean or default(true)
@@ -167,5 +182,22 @@ public class ActivityUtils {
             //noinspection deprecation
             tts.speak(text, TextToSpeech.QUEUE_FLUSH, null);
         }
+    }
+
+    /**
+     * Helper class to handle deprecated method.
+     * Source: http://stackoverflow.com/questions/37904739/html-fromhtml-deprecated-in-android-n
+     * @param html html string
+     * @return Spanned
+     */
+    @SuppressWarnings("deprecation")
+    public static Spanned fromHtml(String html){
+        Spanned result;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            result = Html.fromHtml(html,Html.FROM_HTML_MODE_LEGACY);
+        } else {
+            result = Html.fromHtml(html);
+        }
+        return result;
     }
 }

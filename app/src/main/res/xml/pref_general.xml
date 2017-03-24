@@ -19,6 +19,13 @@
         android:title="@string/pref_header_general"
         android:key="pref_key_storage_settings_general">
 
+        <SwitchPreference
+            android:icon="@drawable/ic_text_fields_black_24dp"
+            android:defaultValue="true"
+            android:key="@string/pref_case_sensitive"
+            android:summary="@string/pref_case_sensitive_summary"
+            android:title="@string/pref_case_sensitive_title" />
+
         <com.xengar.android.wordcounter.utils.FontDialog
             android:icon="@drawable/ic_format_size_black_24dp"
             android:key="@string/pref_font_size"

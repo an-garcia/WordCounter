@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <!--
      Copyright (C) 2017 Angel Garcia
 
@@ -14,10 +13,34 @@
      See the License for the specific language governing permissions and
      limitations under the License.
  -->
-<rotate xmlns:android="http://schemas.android.com/apk/res/android"
-    android:fromDegrees="90"
-    android:toDegrees="90"
-    android:pivotX="50%"
-    android:pivotY="50%"
-    android:drawable="@drawable/ic_count_horizontal_white_24dp">
-</rotate>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+        android:width="24dp"
+        android:height="24dp"
+        android:viewportWidth="24.0"
+        android:viewportHeight="24.0">
+
+    <!--
+    <path
+        android:fillColor="#FFFFFFFF"
+        android:pathData="
+        M3,15h18v-2L3,13v2z
+        M3,19h18v-2L3,17v2z
+        M3,11h18L21,9L3,9v2z
+        M3,5v2h18L21,5L3,5z"/> -->
+
+    <!--
+    https://medium.com/@ali.muzaffar/understanding-vectordrawable-pathdata-commands-in-android-d56a6054610e#.oa835x9ld
+    -->
+    <path
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="3"
+        android:pathData="
+        M3,3 L3,21z
+        M9,3 L9,21z
+        M15,3 L15,21z
+        M21,3 L21,21z
+        M24,6 L0,18z
+        "/>
+</vector>
+
+

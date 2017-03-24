@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <!--
      Copyright (C) 2017 Angel Garcia
 
@@ -13,45 +14,46 @@
      See the License for the specific language governing permissions and
      limitations under the License.
  -->
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.xengar.android.wordcounter.ui.MainActivity">
-
-    <item
-        android:id="@+id/action_count"
-        android:icon="@drawable/ic_count_white_24dp"
-        android:title="@string/count"
-        app:showAsAction="ifRoom|collapseActionView"/>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
         android:id="@+id/action_more"
         android:icon="@drawable/ic_more_vert_white_24dp"
         android:title="@string/more"
         android:orderInCategory="100"
-        app:showAsAction="always">
+        app:showAsAction="ifRoom">
         <menu>
             <item
-                android:id="@+id/action_quick_count"
-                android:title="@string/quick_count"
-                android:icon="@drawable/ic_whatshot_white_24dp"
+                android:id="@+id/action_feedback"
+                android:icon="@drawable/ic_feedback_white_24dp"
+                android:title="@string/give_feedback"
                 android:orderInCategory="100"
                 app:showAsAction="never" />
 
             <item
-                android:id="@+id/action_settings"
-                android:title="@string/settings"
-                android:icon="@drawable/ic_settings_white_24dp"
+                android:id="@+id/action_problem"
+                android:icon="@drawable/ic_bug_report_white_24dp"
+                android:title="@string/report_problem"
                 android:orderInCategory="101"
                 app:showAsAction="never" />
 
             <item
-                android:id="@+id/action_help"
-                android:title="@string/help"
-                android:icon="@drawable/ic_help_white_24dp"
+                android:id="@+id/action_license"
+                android:icon="@drawable/ic_copyright_white_24dp"
+                android:title="@string/license"
                 android:orderInCategory="102"
+                app:showAsAction="never" />
+
+            <item
+                android:id="@+id/action_version"
+                android:icon="@drawable/ic_info_white_24dp"
+                android:title="@string/version"
+                android:orderInCategory="103"
                 app:showAsAction="never" />
 
         </menu>
     </item>
+
 </menu>
