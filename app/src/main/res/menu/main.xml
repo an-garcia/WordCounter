@@ -17,9 +17,27 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.xengar.android.wordcounter.ui.MainActivity">
+
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/action_count"
+        android:icon="@drawable/ic_count_horizontal_white_24dp"
+        android:title="@string/count"
+        app:showAsAction="ifRoom|collapseActionView"/>
+
+    <item
+        android:id="@+id/action_more"
+        android:icon="@drawable/ic_more_vert_white_24dp"
+        android:title="@string/more"
         android:orderInCategory="100"
-        android:title="@string/action_settings"
-        app:showAsAction="never" />
+        app:showAsAction="always">
+        <menu>
+            <item
+                android:id="@+id/action_settings"
+                android:title="@string/settings"
+                android:icon="@drawable/ic_settings_white_24dp"
+                android:orderInCategory="100"
+                app:showAsAction="never" />
+
+        </menu>
+    </item>
 </menu>
