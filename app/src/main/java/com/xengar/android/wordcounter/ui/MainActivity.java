@@ -52,12 +52,28 @@ public class MainActivity extends AppCompatActivity {
         int fontSize = Integer.parseInt(ActivityUtils.getPreferenceFontSize(getApplicationContext()));
         textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, fontSize);
 
-        String currentText = ActivityUtils.getCurrentText(getApplicationContext());
+        String currentText = getSharedText();
+        if (currentText == null){
+            currentText = ActivityUtils.getCurrentText(getApplicationContext());
+        }
         if (currentText != null){
             textView.setText(currentText);
             ActivityUtils.saveStringToPreferences(getApplicationContext(), CURRENT_TEXT, null);
         }
 
+    }
+
+    /**
+     * Get text from Shared intent.
+     * @return String
+     */
+    private String getSharedText(){
+        String text = null;
+        ShareCompat.IntentReader intentReader = ShareCompat.IntentReader.from(this);
+        if (intentReader.isShareIntent()) {
+            text = intentReader.getText().toString();
+        }
+        return text;
     }
 
     @Override
@@ -81,6 +97,7 @@ public class MainActivity extends AppCompatActivity {
                 return true;
 
             case R.id.action_share:
+                // https://medium.com/google-developers/sharing-content-between-android-apps-2e6db9d1368b#.6usvw9n9p
                 Intent shareIntent = ShareCompat.IntentBuilder.from(this)
                         .setType("text/plain")
                         .setText(getCurrentText())
