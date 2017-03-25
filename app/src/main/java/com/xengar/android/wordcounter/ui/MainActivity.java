@@ -16,7 +16,6 @@
 package com.xengar.android.wordcounter.ui;
 
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.ShareCompat;
 import android.support.v7.app.AlertDialog;
@@ -92,19 +91,16 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         switch (id) {
+            case R.id.action_count:
+                ActivityUtils.launchCountActivity(getApplicationContext(), getCurrentText());
+                return true;
+
             case R.id.action_quick_count:
                 quickCount();
                 return true;
 
             case R.id.action_share:
-                // https://medium.com/google-developers/sharing-content-between-android-apps-2e6db9d1368b#.6usvw9n9p
-                Intent shareIntent = ShareCompat.IntentBuilder.from(this)
-                        .setType("text/plain")
-                        .setText(getCurrentText())
-                        .getIntent();
-                if (shareIntent.resolveActivity(getPackageManager()) != null) {
-                    startActivity(shareIntent);
-                }
+                ActivityUtils.launchShareText(this, getCurrentText());
                 return true;
 
             case R.id.action_settings:

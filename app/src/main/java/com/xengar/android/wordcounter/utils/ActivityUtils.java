@@ -15,6 +15,7 @@
  */
 package com.xengar.android.wordcounter.utils;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -23,10 +24,12 @@ import android.os.Build;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
 import android.speech.tts.TextToSpeech;
+import android.support.v4.app.ShareCompat;
 import android.text.Html;
 import android.text.Spanned;
 
 import com.xengar.android.wordcounter.R;
+import com.xengar.android.wordcounter.ui.CountActivity;
 import com.xengar.android.wordcounter.ui.HelpActivity;
 import com.xengar.android.wordcounter.ui.SettingsActivity;
 
@@ -110,6 +113,22 @@ public class ActivityUtils {
     }
 
     /**
+     * Launch share text intent.
+     * @param activity Activity
+     * @param text String
+     */
+    public static void launchShareText(final Activity activity, final String text){
+        // https://medium.com/google-developers/sharing-content-between-android-apps-2e6db9d1368b#.6usvw9n9p
+        Intent shareIntent = ShareCompat.IntentBuilder.from(activity)
+                .setType("text/plain")
+                .setText(text)
+                .getIntent();
+        if (shareIntent.resolveActivity(activity.getPackageManager()) != null) {
+            activity.startActivity(shareIntent);
+        }
+    }
+
+    /**
      * Launches Settings Activity.
      * @param context context
      */
@@ -124,14 +143,14 @@ public class ActivityUtils {
     }
 
     /**
-     * Launches Search Activity.
+     * Launches Count Activity.
      * @param context context
-     */ /*
-    public static void launchSearchActivity(final Context context) {
-        Intent intent = new Intent(context, SearchActivity.class);
+     */
+    public static void launchCountActivity(final Context context, final String text) {
+        Intent intent = new Intent(context, CountActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(intent);
-    }*/
+    }
 
     /**
      * Returns the value of show definitions from preferences.
