@@ -15,7 +15,9 @@
  */
 package com.xengar.android.wordcounter.ui;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
@@ -32,6 +34,10 @@ import static com.xengar.android.wordcounter.utils.Constants.CURRENT_TEXT;
  * MainActivity
  */
 public class MainActivity extends AppCompatActivity {
+
+    private long cWords = 0;
+    private long cCharacters = 0;
+    private long cSpaces = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +74,10 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         switch (id) {
+            case R.id.action_quick_count:
+                quickCount();
+                return true;
+
             case R.id.action_settings:
                 MultiAutoCompleteTextView textView = (MultiAutoCompleteTextView) findViewById(R.id.text);
                 String currentText = textView.getText().toString();
@@ -81,5 +91,59 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    /**
+     * Make a quick count of the words.
+     */
+    private void quickCount() {
+        calculateWords();
+        // TODO: Use a layout.
+        String message = "Words: " + cWords
+                + "\nCharacters: " + cCharacters
+                + "\nSpaces: " + cSpaces;
+
+        AlertDialog alert = new AlertDialog.Builder(this, R.style.MyAlertDialogStyle)
+                .setTitle(R.string.quick_count)
+                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener(){
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                })
+                //.setView(colorPickerPalette)
+                .setMessage(message)
+                .create();
+        alert.show();
+    }
+
+    /**
+     * Get the number of words in the text.
+     */
+    private void calculateWords() {
+        MultiAutoCompleteTextView textView = (MultiAutoCompleteTextView) findViewById(R.id.text);
+        String text = textView.getText().toString();
+        cCharacters = text.length();
+        // Parse out unwanted whitespace so the split is accurate
+        // Source https://github.com/Microsoft/vscode-wordcount/blob/ae44cafd7be4e22e38e7afc6996e1646b5366c20/extension.ts
+        // docContent = docContent.replace(/(< ([^>]+)<)/g, '').replace(/\s+/g, ' ');
+        // docContent = docContent.replace(/^\s\s*/, '').replace(/\s\s*$/, '');
+        text = text.replaceAll("(< ([^>]+)<)", "").replaceAll("\\s+", " ");
+        text = text.replaceFirst("^\\s\\s*", "").replaceFirst("\\s\\s*$", "");
+        cSpaces = cCharacters - text.length();
+
+        // if the word contains at least one character of the preferences, count it as word
+        String[] words =  text.split(" ");
+        String characters = ActivityUtils.getPreferenceCharactersInWord(getApplicationContext());
+        cSpaces += (words.length > 0)? words.length - 1 : 0;
+        cWords = 0;
+        for (String word: words) {
+            for (int i = 0; i < word.length(); i++) {
+                char ch = word.charAt(i);
+                if (characters.indexOf(ch) > -1) {
+                    cWords++;
+                    break;
+                }
+            }
+        }
     }
 }

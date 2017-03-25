@@ -35,8 +35,25 @@
             android:negativeButtonText="@null"
             android:positiveButtonText="@null" />
 
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/pref_header_text_segmentation_rules"
+        android:key="pref_key_storage_settings_words">
+
+        <EditTextPreference
+            android:icon="@drawable/ic_letters_black_24dp"
+            android:capitalize="words"
+            android:defaultValue="@string/pref_word_characters_default"
+            android:inputType="textCapWords"
+            android:key="@string/pref_word_characters"
+            android:maxLines="1"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:title="@string/pref_word_characters_title" />
 
     </PreferenceCategory>
+
 
     <!--
     <SwitchPreference

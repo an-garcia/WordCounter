@@ -133,9 +133,13 @@
     <string name="pref_case_sensitive">pref_case_sensitive</string>
     <string name="pref_case_sensitive_summary">Consider uppercase in words.</string>
     <string name="pref_case_sensitive_title">Case sensitive</string>
+    <string name="pref_word_characters">word_characters</string>
+    <string name="pref_word_characters_title">Characters in words</string>
+    <string name="pref_word_characters_default">ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz123456789Ññ</string>
 
     <!-- Example General settings -->
     <string name="pref_header_general">General</string>
+    <string name="pref_header_text_segmentation_rules">Text segmentation rules</string>
     <string name="title_activity_help">HelpActivity</string>
 
     <!--

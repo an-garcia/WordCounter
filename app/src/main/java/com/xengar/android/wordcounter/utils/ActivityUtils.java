@@ -31,6 +31,7 @@ import com.xengar.android.wordcounter.ui.HelpActivity;
 import com.xengar.android.wordcounter.ui.SettingsActivity;
 
 import static com.xengar.android.wordcounter.utils.Constants.CURRENT_TEXT;
+import static com.xengar.android.wordcounter.utils.Constants.DEFAULT_CHARACTERS_IN_WORD;
 import static com.xengar.android.wordcounter.utils.Constants.DEFAULT_FONT_SIZE;
 import static com.xengar.android.wordcounter.utils.Constants.SHARED_PREF_NAME;
 
@@ -135,7 +136,7 @@ public class ActivityUtils {
     /**
      * Returns the value of show definitions from preferences.
      * @param context context
-     * @return boolean or default(true)
+     * @return String
      */
     public static String getPreferenceFontSize(final Context context) {
         String key = context.getString(R.string.pref_font_size);
@@ -146,12 +147,23 @@ public class ActivityUtils {
     /**
      * Returns the case sensitive preference in Settings.
      * @param context Context
-     * @return
+     * @return boolean
      */
     public static boolean getPreferenceCaseSensitive(final Context context) {
         String key = context.getString(R.string.pref_case_sensitive);
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         return prefs.getBoolean(key, true);
+    }
+
+    /**
+     * Returns the characters in words from preferences.
+     * @param context context
+     * @return String
+     */
+    public static String getPreferenceCharactersInWord(final Context context) {
+        String key = context.getString(R.string.pref_word_characters);
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        return prefs.getString(key, DEFAULT_CHARACTERS_IN_WORD);
     }
 
     /**

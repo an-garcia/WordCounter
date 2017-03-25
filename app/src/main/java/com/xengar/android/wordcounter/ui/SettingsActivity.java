@@ -236,6 +236,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity
             //bindPreferenceSummaryToValue(findPreference("example_text"));
             //bindPreferenceSummaryToValue(findPreference("example_list"));
             bindPreferenceSummaryToValue(findPreference(getString(R.string.pref_font_size)));
+            bindPreferenceSummaryToValue(findPreference(getString(R.string.pref_word_characters)));
         }
 
         @Override

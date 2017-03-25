@@ -41,4 +41,16 @@
         <item name="android:orientation">vertical</item>
     </style>
 
+    <style name="MyAlertDialogStyle" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <!-- Used for the buttons -->
+        <item name="colorAccent">@color/colorAccent</item>
+        <!-- Used for the title and text -->
+        <item name="android:textColorPrimary">@color/colorWhite</item>
+        <!-- List items -->
+        <item name="textColorAlertDialogListItem">@color/colorWhite</item>
+        <!-- Used for the background -->
+        <item name="android:background">@color/grey_850</item>
+    </style>
+
+
 </resources>
