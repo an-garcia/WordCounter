@@ -16,7 +16,9 @@
 package com.xengar.android.wordcounter.ui;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.ShareCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -78,10 +80,18 @@ public class MainActivity extends AppCompatActivity {
                 quickCount();
                 return true;
 
+            case R.id.action_share:
+                Intent shareIntent = ShareCompat.IntentBuilder.from(this)
+                        .setType("text/plain")
+                        .setText(getCurrentText())
+                        .getIntent();
+                if (shareIntent.resolveActivity(getPackageManager()) != null) {
+                    startActivity(shareIntent);
+                }
+                return true;
+
             case R.id.action_settings:
-                MultiAutoCompleteTextView textView = (MultiAutoCompleteTextView) findViewById(R.id.text);
-                String currentText = textView.getText().toString();
-                ActivityUtils.saveStringToPreferences(getApplicationContext(), CURRENT_TEXT, currentText);
+                ActivityUtils.saveStringToPreferences(getApplicationContext(), CURRENT_TEXT, getCurrentText());
                 ActivityUtils.launchSettingsActivity(getApplicationContext());
                 return true;
 
@@ -91,6 +101,15 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    /**
+     * Gets current text
+     * @return String
+     */
+    private String getCurrentText(){
+        MultiAutoCompleteTextView textView = (MultiAutoCompleteTextView) findViewById(R.id.text);
+        return textView.getText().toString();
     }
 
     /**

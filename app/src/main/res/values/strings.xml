@@ -17,6 +17,7 @@
     <string name="app_name">Word Counter</string>
     <string name="text_hint">Type or paste text here.</string>
     <string name="settings">Settings</string>
+    <string name="share">Share</string>
     <string name="count">Count</string>
     <string name="quick_count">Quick Count</string>
     <string name="help">Help</string>
