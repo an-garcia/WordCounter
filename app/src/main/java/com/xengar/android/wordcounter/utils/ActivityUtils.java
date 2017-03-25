@@ -21,6 +21,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.AudioManager;
 import android.os.Build;
+import android.os.Bundle;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
 import android.speech.tts.TextToSpeech;
@@ -149,6 +150,9 @@ public class ActivityUtils {
     public static void launchCountActivity(final Context context, final String text) {
         Intent intent = new Intent(context, CountActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        Bundle bundle = new Bundle();
+        bundle.putString(CURRENT_TEXT, text);
+        intent.putExtras(bundle);
         context.startActivity(intent);
     }
 

@@ -59,7 +59,6 @@ public class MainActivity extends AppCompatActivity {
             textView.setText(currentText);
             ActivityUtils.saveStringToPreferences(getApplicationContext(), CURRENT_TEXT, null);
         }
-
     }
 
     /**
@@ -92,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         switch (id) {
             case R.id.action_count:
+                ActivityUtils.saveStringToPreferences(getApplicationContext(), CURRENT_TEXT, getCurrentText());
                 ActivityUtils.launchCountActivity(getApplicationContext(), getCurrentText());
                 return true;
 

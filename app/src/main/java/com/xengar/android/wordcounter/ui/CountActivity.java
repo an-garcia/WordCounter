@@ -18,8 +18,10 @@ package com.xengar.android.wordcounter.ui;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.xengar.android.wordcounter.R;
 import com.xengar.android.wordcounter.utils.ActivityUtils;
@@ -31,6 +33,8 @@ import static com.xengar.android.wordcounter.utils.Constants.CURRENT_TEXT;
  */
 public class CountActivity extends AppCompatActivity {
 
+    private TextView textView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +43,12 @@ public class CountActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        Bundle bundle = getIntent().getExtras();
+        String text = bundle.getString(CURRENT_TEXT);
+        textView = (TextView) findViewById(R.id.text);
+        textView.setText(text);
+        int fontSize = Integer.parseInt(ActivityUtils.getPreferenceFontSize(getApplicationContext()));
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, fontSize);
     }
 
     @Override
