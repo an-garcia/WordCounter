@@ -24,6 +24,7 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.xengar.android.wordcounter.R;
+import com.xengar.android.wordcounter.data.Count;
 import com.xengar.android.wordcounter.utils.ActivityUtils;
 
 import static com.xengar.android.wordcounter.utils.Constants.CURRENT_TEXT;
@@ -34,6 +35,7 @@ import static com.xengar.android.wordcounter.utils.Constants.CURRENT_TEXT;
 public class CountActivity extends AppCompatActivity {
 
     private TextView textView;
+    private Count count = new Count();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +51,20 @@ public class CountActivity extends AppCompatActivity {
         textView.setText(text);
         int fontSize = Integer.parseInt(ActivityUtils.getPreferenceFontSize(getApplicationContext()));
         textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, fontSize);
+
+
+        // Change font sizes
+        ((TextView) findViewById(R.id.words_title)).setTextSize(TypedValue.COMPLEX_UNIT_SP, fontSize);
+        ((TextView) findViewById(R.id.characters_title)).setTextSize(TypedValue.COMPLEX_UNIT_SP, fontSize);
+        ((TextView) findViewById(R.id.spaces_title)).setTextSize(TypedValue.COMPLEX_UNIT_SP, fontSize);
+        ((TextView) findViewById(R.id.words)).setTextSize(TypedValue.COMPLEX_UNIT_SP, fontSize);
+        ((TextView) findViewById(R.id.characters)).setTextSize(TypedValue.COMPLEX_UNIT_SP, fontSize);
+        ((TextView) findViewById(R.id.spaces)).setTextSize(TypedValue.COMPLEX_UNIT_SP, fontSize);
+
+        ActivityUtils.calculateWords(getApplicationContext(), text, count);
+        ((TextView) findViewById(R.id.words)).setText(String.valueOf(count.getWords()));
+        ((TextView) findViewById(R.id.characters)).setText(String.valueOf(count.getCharacters()));
+        ((TextView) findViewById(R.id.spaces)).setText(String.valueOf(count.getSpaces()));
     }
 
     @Override
@@ -93,9 +109,7 @@ public class CountActivity extends AppCompatActivity {
      * @return String
      */
     private String getCurrentText(){
-        //MultiAutoCompleteTextView textView = (MultiAutoCompleteTextView) findViewById(R.id.text);
-        //return textView.getText().toString();
-        return null;
+        TextView textView = (TextView) findViewById(R.id.text);
+        return textView.getText().toString();
     }
-
 }

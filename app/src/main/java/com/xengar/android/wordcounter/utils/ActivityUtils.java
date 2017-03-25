@@ -30,6 +30,7 @@ import android.text.Html;
 import android.text.Spanned;
 
 import com.xengar.android.wordcounter.R;
+import com.xengar.android.wordcounter.data.Count;
 import com.xengar.android.wordcounter.ui.CountActivity;
 import com.xengar.android.wordcounter.ui.HelpActivity;
 import com.xengar.android.wordcounter.ui.SettingsActivity;
@@ -234,5 +235,36 @@ public class ActivityUtils {
             result = Html.fromHtml(html);
         }
         return result;
+    }
+
+    /**
+     * Get the number of words in the text.
+     */
+    public static void calculateWords(final Context context, String text, Count count) {
+        count.setCharacters(text.length());
+        // Parse out unwanted whitespace so the split is accurate
+        // Source https://github.com/Microsoft/vscode-wordcount/blob/ae44cafd7be4e22e38e7afc6996e1646b5366c20/extension.ts
+        // docContent = docContent.replace(/(< ([^>]+)<)/g, '').replace(/\s+/g, ' ');
+        // docContent = docContent.replace(/^\s\s*/, '').replace(/\s\s*$/, '');
+        text = text.replaceAll("(< ([^>]+)<)", "").replaceAll("\\s+", " ");
+        text = text.replaceFirst("^\\s\\s*", "").replaceFirst("\\s\\s*$", "");
+        long cSpaces = count.getCharacters() - text.length();
+
+        // if the word contains at least one character of the preferences, count it as word
+        String[] words =  text.split(" ");
+        String characters = ActivityUtils.getPreferenceCharactersInWord(context);
+        int spaces = (words.length > 0)? words.length - 1 : 0;
+        count.setSpaces(cSpaces + spaces);
+        long cWords = 0;
+        for (String word: words) {
+            for (int i = 0; i < word.length(); i++) {
+                char ch = word.charAt(i);
+                if (characters.indexOf(ch) > -1) {
+                    cWords++;
+                    break;
+                }
+            }
+        }
+        count.setWords(cWords);
     }
 }

@@ -24,6 +24,9 @@
     <string name="help">Help</string>
     <string name="more">More</string>
     <string name="demo">demo</string>
+    <string name="words">Words</string>
+    <string name="characters">Characters</string>
+    <string name="spaces">Spaces</string>
     <string name="word_counter_help">Word counter include: words, sentences and spaces.</string>
 
     <string name="report_problem">Report a problem</string>

@@ -67,12 +67,87 @@
                         android:gravity="start"
                         android:text="@string/count"/>
 
-                    <TextView
+                    <LinearLayout
+                        android:paddingTop="10dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="1dp"
-                        android:paddingTop="10dp"
-                        android:text="@string/word_counter_help"/>
+                        android:orientation="horizontal">
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1">
+                            <TextView
+                                android:id="@+id/words_title"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/words"/>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1">
+                            <TextView
+                                android:id="@+id/words"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                tools:text="250" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1">
+                            <TextView
+                                android:id="@+id/characters_title"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/characters"/>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1">
+                            <TextView
+                                android:id="@+id/characters"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                tools:text="2000" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1">
+                            <TextView
+                                android:id="@+id/spaces_title"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/spaces"/>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1">
+                            <TextView
+                                android:id="@+id/spaces"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                tools:text="50" />
+                        </LinearLayout>
+                    </LinearLayout>
 
                 </LinearLayout>
             </android.support.v7.widget.CardView>
@@ -94,7 +169,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="start"
-                        android:text="@string/count"/>
+                        android:text="@string/words"/>
 
                     <TextView
                         android:layout_width="match_parent"
