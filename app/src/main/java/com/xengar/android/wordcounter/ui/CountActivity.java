@@ -21,11 +21,17 @@ import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.xengar.android.wordcounter.R;
 import com.xengar.android.wordcounter.data.Count;
+import com.xengar.android.wordcounter.data.Word;
 import com.xengar.android.wordcounter.utils.ActivityUtils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static com.xengar.android.wordcounter.utils.Constants.CURRENT_TEXT;
 
@@ -36,6 +42,7 @@ public class CountActivity extends AppCompatActivity {
 
     private TextView textView;
     private Count count = new Count();
+    private List<Word> wordList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +59,6 @@ public class CountActivity extends AppCompatActivity {
         int fontSize = Integer.parseInt(ActivityUtils.getPreferenceFontSize(getApplicationContext()));
         textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, fontSize);
 
-
         // Change font sizes
         ((TextView) findViewById(R.id.words_title)).setTextSize(TypedValue.COMPLEX_UNIT_SP, fontSize);
         ((TextView) findViewById(R.id.characters_title)).setTextSize(TypedValue.COMPLEX_UNIT_SP, fontSize);
@@ -65,6 +71,9 @@ public class CountActivity extends AppCompatActivity {
         ((TextView) findViewById(R.id.words)).setText(String.valueOf(count.getWords()));
         ((TextView) findViewById(R.id.characters)).setText(String.valueOf(count.getCharacters()));
         ((TextView) findViewById(R.id.spaces)).setText(String.valueOf(count.getSpaces()));
+
+        fillWordList(text);
+        fillListLayout();
     }
 
     @Override
@@ -108,8 +117,69 @@ public class CountActivity extends AppCompatActivity {
      * Gets current text
      * @return String
      */
-    private String getCurrentText(){
+    private String getCurrentText() {
         TextView textView = (TextView) findViewById(R.id.text);
         return textView.getText().toString();
+    }
+
+    /**
+     * Fills the word list.
+     * @param text String
+     */
+    private void fillWordList(String text) {
+        wordList.clear();
+
+        // Consider case sensitive
+        if(!ActivityUtils.getPreferenceCaseSensitive(getApplicationContext())) {
+            text = text.toLowerCase();
+        }
+
+        // Add the count of words to the list
+        String characters = ActivityUtils.getPreferenceCharactersInWord(getApplicationContext());
+        String[] words = text.split(" ");
+        for (String word : words) {
+            boolean valid = false;
+            for (int i = 0; i < word.length(); i++) {
+                char ch = word.charAt(i);
+                if (characters.indexOf(ch) > -1) {
+                    valid = true;
+                    break;
+                }
+            }
+            if (valid) {
+                boolean found = false;
+                for (Word w : wordList) {
+                    if (w.getName().contentEquals(word)) {
+                        w.incrementNumber();
+                        found = true;
+                        break;
+                    }
+                }
+                if (!found) {
+                    wordList.add(new Word(word, 1));
+                }
+            }
+        }
+    }
+
+    /**
+     * Fills the list Layout with the list.
+     */
+    private void fillListLayout(){
+        int fontSize = Integer.parseInt(ActivityUtils.getPreferenceFontSize(getApplicationContext()));
+        LinearLayout wordListView = (LinearLayout) findViewById(R.id.word_list);
+        TextView textView;
+        for (Word word : wordList){
+            View view = getLayoutInflater().inflate(R.layout.word_list_item, null);
+            textView = (TextView) view.findViewById(R.id.word_name);
+            textView.setText(word.getName());
+            textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, fontSize);
+
+            textView = (TextView) view.findViewById(R.id.word_count);
+            textView.setText(String.valueOf(word.getNumber()));
+            textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, fontSize);
+
+            wordListView.addView(view);
+        }
     }
 }

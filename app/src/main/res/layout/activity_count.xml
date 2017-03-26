@@ -171,12 +171,11 @@
                         android:gravity="start"
                         android:text="@string/words"/>
 
-                    <TextView
+                    <LinearLayout
+                        android:id="@+id/word_list"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="1dp"
-                        android:paddingTop="10dp"
-                        android:text="@string/word_counter_help"/>
+                        android:orientation="vertical"/>
 
                 </LinearLayout>
             </android.support.v7.widget.CardView>
