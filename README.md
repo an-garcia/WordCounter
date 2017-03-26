@@ -1,9 +1,9 @@
 Word Counter
 =============
 
-![Scheme](/readmeImages/device-2017-03-11-172715x.png)
-![Scheme](/readmeImages/device-2017-03-11-172808x.png)
-![Scheme](/readmeImages/device-2017-03-11-172852x.png)
+![Scheme](/readmeImages/device-2017-03-25-183052.png)
+![Scheme](/readmeImages/device-2017-03-25-183148.png)
+![Scheme](/readmeImages/device-2017-03-25-183205.png)
 
 
 Android application to count words.
